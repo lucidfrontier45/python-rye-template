@@ -16,7 +16,6 @@ RUN curl -sSf https://rye-up.com/get | bash
 
 # config rye
 RUN rye config --set-bool behavior.use-uv=true
-# RUN rye toolchain register -n default /usr/local/bin/python
 
 # install dependencies
 RUN rye pin --relaxed 3
