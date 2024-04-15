@@ -25,8 +25,6 @@ packages = ["src/app"]
 [tool.rye]
 managed = true
 dev-dependencies = ["pyright>=1.1.358", "pytest-cov>=5.0.0", "uvicorn>=0.29.0"]
-# set the following line to false if it's a library project
-virtual = true
 
 [tool.rye.scripts]
 pyright_lint = "pyright ."

@@ -1,4 +1,5 @@
-FROM python:3.11-slim as builder
+#---------builder------------
+FROM python:3.11-slim-bookworm as builder
 WORKDIR /project
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -16,22 +17,25 @@ RUN curl -sSf https://rye-up.com/get | bash
 
 # config rye
 RUN rye config --set-bool behavior.use-uv=true
-
-# install dependencies
 RUN rye pin --relaxed 3
+
+# install dependencies (no lockfile)
 COPY pyproject.toml /project/
 RUN rye sync --no-dev --all-features
 
-# if you have requirements.lock, copy it too
-#COPY pyproject.toml requirements.lock /project/
-#RUN rye sync --no-dev --no-lock
+# install dependencies (with lockfile)
+# COPY pyproject.toml requirements.lock /project/
+# RUN rye sync --no-dev --no-lock
 
-FROM python:3.11-slim
+
+#---------runner------------
+FROM python:3.11-slim-bookworm as runner
 WORKDIR /project
 
 COPY --from=builder /project/.venv /project/.venv
 ENV PATH /project/.venv/bin:$PATH
-COPY src/ /project/
+
+COPY src/app /project/app
 
 ENV N_WORKERS 4
 
