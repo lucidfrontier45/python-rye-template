@@ -7,7 +7,7 @@ dependencies = ["fastapi>=0.110.1"]
 requires-python = ">=3.11"
 
 [project.optional-dependencies]
-server = ["fastapi[standard]>=0.110.1", "uvicorn>=0.29.0"]
+server = ["uvicorn[standard]>=0.29.0"]
 
 [project.scripts]
 app = "app.cli:main"
