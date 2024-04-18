@@ -27,11 +27,7 @@ The settings of those linter and formatters are written in `pyproject.toml`
 
 # VSCode Settings
 
-```bash
-cp vscode_templates .vscode
-```
-
-Then install/activate all extensions listed in `.vscode/extensions.json`
+Install/activate all extensions listed in `.vscode/extensions.json`
 
 # Creating Console Script
 
